@@ -44,7 +44,7 @@
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/CyberShield.git
+git clone https://github.com/MandithaNanayakkara/CyberSheild.git
 cd CyberShield
 ```
 
