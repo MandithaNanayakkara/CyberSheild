@@ -1,110 +1,165 @@
 import React from 'react';
-import { ShieldCheck, AlertTriangle, Activity, Globe, Mail, QrCode, Key, Scan, Shield, Lock, FileText, GraduationCap, Zap, Eye, Database, Cpu, Network, CheckCircle } from 'lucide-react';
+import {
+    ShieldCheck, AlertTriangle, Activity, Globe, Mail, QrCode, Key, Scan,
+    Shield, Lock, FileText, GraduationCap, Zap, Eye, Database, Cpu, Network,
+    CheckCircle, Search, Layers, ChevronRight
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Dashboard = () => {
+    const { user } = useAuth();
     const features = [
-        // Existing core features
-        { title: 'Text Analysis', icon: <Scan />, path: '/detect', color: 'var(--accent-green)', desc: 'AI-based phishing detection.' },
-        { title: 'Email Deep-Scan', icon: <Mail />, path: '/email', color: 'var(--accent-blue)', desc: 'Verify headers & tone.' },
-        { title: 'URL Verification', icon: <Globe />, path: '/url-scanner', color: 'var(--accent-blue)', desc: 'Check malicious domains.' },
-        { title: 'Secure QR', icon: <QrCode />, path: '/qr-scanner', color: 'var(--accent-green)', desc: 'Analyze QR destinations.' },
-        { title: 'Identity Audit', icon: <Key />, path: '/password', color: 'var(--accent-red)', desc: 'Password strength check.' },
-        { title: 'Shield Monitor', icon: <Activity />, path: '/monitor', color: 'var(--accent-green)', desc: 'Behavioral scanning.' },
-
-        // Additional PhishGuard 19 Features
-        { title: 'Attachment Sanity', icon: <Zap />, path: '/feature/attachment-scan', color: 'var(--accent-blue)', desc: 'Scan files for malware.' },
-        { title: 'Domain Reputation', icon: <Database />, path: '/feature/domain-rep', color: 'var(--accent-green)', desc: 'Whois & age analysis.' },
-        { title: 'SSL Validator', icon: <Lock />, path: '/feature/ssl-check', color: 'var(--accent-blue)', desc: 'Verify cert encryption.' },
-        { title: 'Dark Web Monitor', icon: <Eye />, path: '/feature/dark-web', color: 'var(--accent-red)', desc: 'Credential leak alerts.' },
-        { title: 'Simulation Quiz', icon: <GraduationCap />, path: '/academy', color: 'var(--accent-green)', desc: 'Test your phishing IQ.' },
-        { title: 'Device Health', icon: <Cpu />, path: '/feature/device-health', color: 'var(--accent-blue)', desc: 'System integrity check.' },
-        { title: 'App Firewall', icon: <Shield />, path: '/feature/app-firewall', color: 'var(--accent-red)', desc: 'Review risky permissions.' },
-        { title: 'Safe Proxy', icon: <Globe />, path: '/feature/safe-proxy', color: 'var(--accent-green)', desc: 'Anonymized browsing.' },
-        { title: '2FA Manager', icon: <Key />, path: '/feature/2fa-manager', color: 'var(--accent-blue)', desc: 'Multi-factor assistance.' },
-        { title: 'Incident Reports', icon: <FileText />, path: '/reports', color: 'var(--accent-green)', desc: 'Actionable scam insights.' },
-        { title: 'Network Security', icon: <Network />, path: '/feature/network-sec', color: 'var(--accent-blue)', desc: 'WiFi & DNS inspection.' },
-        { title: 'Smart Alerts', icon: <Zap />, path: '/feature/alerts', color: 'var(--accent-red)', desc: 'Instant threat discovery.' },
-        { title: 'API Integration', icon: <Database />, path: '/feature/api', color: 'var(--accent-blue)', desc: 'Third-party protection.' },
+        { title: 'Text Analysis', desc: 'AI-based phishing detection.', icon: <Scan />, path: '/detect', status: 'Active' },
+        { title: 'Email Deep-Scan', desc: 'Verify headers & tone.', icon: <Mail />, path: '/email', status: 'Active' },
+        { title: 'URL Verification', desc: 'Real-time link scanning.', icon: <Search />, path: '/url-scanner', status: 'Active' },
+        { title: 'Secure QR', desc: 'Analyze QR destinations.', icon: <QrCode />, path: '/qr-scanner', status: 'Active' },
+        { title: 'Identity Audit', desc: 'Check password strength.', icon: <Key />, path: '/password', status: 'Active' },
+        { title: 'Shield Monitor', desc: 'Heuristic session logging.', icon: <Activity />, path: '/monitor', status: 'Active' },
+        { title: 'Academy', desc: 'Interactive security training.', icon: <GraduationCap />, path: '/academy', status: 'Active' },
+        { title: 'Reports', desc: 'Community threat database.', icon: <FileText />, path: '/reports', status: 'Active' },
+        { title: 'Attachment Sanity', desc: 'Deep file inspection.', id: 'attachment-scan', status: 'Shielded' },
+        { title: 'Domain Reputation', desc: 'Global blacklist check.', id: 'domain-rep', status: 'Shielded' },
+        { title: 'SSL Validator', desc: 'Verify certificate chain.', id: 'ssl-val', status: 'Shielded' },
+        { title: 'Dark Web Monitor', desc: 'Credential leak alerts.', id: 'dark-web', status: 'Shielded' },
+        { title: 'Device Health', desc: 'Local hardware security.', id: 'device-health', status: 'Shielded' },
+        { title: 'App Firewall', desc: 'Block malicious traffic.', id: 'firewall', status: 'Shielded' },
+        { title: 'Safe Proxy', desc: 'Encrypted traffic routing.', id: 'proxy', status: 'Shielded' },
+        { title: '2FA Manager', desc: 'Secure token storage.', id: '2fa', status: 'Shielded' },
+        { title: 'Network Security', desc: 'Inspect WiFi integrity.', id: 'network', status: 'Shielded' },
+        { title: 'Smart Alerts', desc: 'Instant threat discovery.', id: 'alerts', status: 'Shielded' },
+        { title: 'API Integration', desc: 'Third-party protection.', id: 'api', status: 'Shielded' },
     ];
 
     return (
-        <div className="animate-fade-in">
-            <header className="flex justify-between items-center" style={{ marginBottom: '2rem' }}>
-                <div>
-                    <h1 className="text-2xl">Security Command Center</h1>
-                    <p className="text-sm">Unified 19-Feature Protection | © 2025 CyberShield</p>
-                </div>
-                <div className="badge badge-safe flex items-center gap-2" style={{ padding: '8px 16px', fontSize: '1rem' }}>
-                    <ShieldCheck size={20} /> System Fully Protected
-                </div>
-            </header>
+        <div className="animate-fade-in flex flex-col gap-8">
+            {/* Hero Status Section */}
+            <section className="card relative overflow-hidden" style={{
+                padding: '3rem',
+                background: 'linear-gradient(135deg, rgba(10,10,10,0.8), rgba(0, 184, 255, 0.05))',
+                border: '1px solid rgba(0, 184, 255, 0.2)',
+                borderRadius: '24px'
+            }}>
+                <div style={{
+                    position: 'absolute',
+                    top: '-50px',
+                    right: '-50px',
+                    width: '200px',
+                    height: '200px',
+                    background: 'var(--accent-blue)',
+                    filter: 'blur(100px)',
+                    opacity: 0.1
+                }}></div>
 
-            {/* Main Stats Grid */}
-            <div className="grid grid-cols-3 gap-4" style={{ marginBottom: '2rem' }}>
-                <div className="card flex flex-col items-center text-center">
-                    <div style={{ color: 'var(--accent-green)', marginBottom: '1rem' }}>
-                        <Activity size={40} />
-                    </div>
-                    <h2 className="text-2xl">100%</h2>
-                    <p className="text-sm">Safety Score</p>
-                </div>
-                <div className="card flex flex-col items-center text-center">
-                    <div style={{ color: 'var(--accent-blue)', marginBottom: '1rem' }}>
-                        <Globe size={40} />
-                    </div>
-                    <h2 className="text-2xl">1,420</h2>
-                    <p className="text-sm">Threats Monitored</p>
-                </div>
-                <div className="card flex flex-col items-center text-center">
-                    <div style={{ color: 'var(--accent-red)', marginBottom: '1rem' }}>
-                        <AlertTriangle size={40} />
-                    </div>
-                    <h2 className="text-2xl">0</h2>
-                    <p className="text-sm">Active Vulnerabilities</p>
-                </div>
-            </div>
+                <div className="flex justify-between items-center relative z-10">
+                    <div>
+                        <h1 className="text-4xl font-bold mb-2">Security <span className="text-gradient">Command Center</span></h1>
+                        <p className="text-lg opacity-80">Welcome back, <span className="text-white font-semibold">Operative {user?.name}</span>. Shield systems are 100% operational.</p>
 
-            <h3 className="text-xl" style={{ marginBottom: '1.5rem' }}>Active 19-Feature Suite</h3>
-            <div className="grid grid-cols-4 gap-4" style={{ marginBottom: '3rem' }}>
-                {features.map((f, i) => (
-                    <Link key={i} to={f.path} className="card flex flex-col gap-2 hover:border-accent-blue" style={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit', padding: '16px' }}>
-                        <div style={{ color: f.color, display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            {f.icon}
-                            <span style={{ fontSize: '0.8rem', fontWeight: 'bold' }}>Active</span>
-                        </div>
-                        <h4 style={{ fontWeight: 'bold', fontSize: '1rem' }}>{f.title}</h4>
-                        <p className="text-sm" style={{ fontSize: '0.75rem', lineHeight: '1.2' }}>{f.desc}</p>
-                    </Link>
-                ))}
-            </div>
-
-            <div className="grid grid-cols-2 gap-8">
-                <div>
-                    <h3 className="text-xl" style={{ marginBottom: '1rem' }}>Real-time Log</h3>
-                    <div className="flex flex-col gap-4">
-                        {[1, 2].map((i) => (
-                            <div key={i} className="card flex justify-between items-center" style={{ padding: '16px' }}>
-                                <div className="flex items-center gap-4">
-                                    <div style={{ background: 'rgba(0, 255, 157, 0.1)', padding: '8px', borderRadius: '50%' }}>
-                                        <CheckCircle size={20} color="var(--accent-green)" />
-                                    </div>
-                                    <div>
-                                        <p style={{ fontWeight: 600 }}>Heuristic Scan Done</p>
-                                        <p className="text-sm">No anomalies in background processes.</p>
-                                    </div>
-                                </div>
-                                <span className="text-sm">Just now</span>
+                        <div className="flex gap-4 mt-8">
+                            <div className="flex items-center gap-2 bg-black/40 px-4 py-2 rounded-xl border border-white/5">
+                                <div className="pulse-green"></div>
+                                <span className="text-sm font-medium">Core Protection: <span style={{ color: 'var(--accent-green)' }}>Online</span></span>
                             </div>
-                        ))}
+                            <div className="flex items-center gap-2 bg-black/40 px-4 py-2 rounded-xl border border-white/5">
+                                <Activity size={16} color="var(--accent-blue)" />
+                                <span className="text-sm font-medium">Network Latency: <span style={{ color: 'var(--accent-blue)' }}>14ms</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="text-center bg-black/40 p-6 rounded-3xl border border-white/10 backdrop-blur-md" style={{ minWidth: '180px' }}>
+                        <div className="text-4xl font-bold text-gradient mb-1">100%</div>
+                        <div className="text-xs uppercase tracking-widest opacity-60">Safety Score</div>
+                        <div style={{ marginTop: '1rem', height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px' }}>
+                            <div style={{ width: '100%', height: '100%', background: 'var(--accent-green)', borderRadius: '2px', boxShadow: '0 0 10px var(--accent-green)' }}></div>
+                        </div>
                     </div>
                 </div>
-                <div className="card">
-                    <h3 className="text-xl" style={{ marginBottom: '1rem' }}>2025 Shield Updates</h3>
-                    <p className="text-sm" style={{ marginBottom: '1rem' }}>Your subscription includes all 19 current PhishGuard features. Next update scheduled for Jan 2025.</p>
-                    <button className="btn btn-outline w-full">View Update Notes</button>
+            </section>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-3 gap-6">
+                <div className="card card-cyber p-6 flex items-center gap-4 bg-black/20" style={{ borderLeftColor: 'var(--accent-blue)' }}>
+                    <div className="p-3 bg-blue-500/10 rounded-xl"><ShieldCheck size={24} color="var(--accent-blue)" /></div>
+                    <div>
+                        <div className="text-2xl font-bold">1,420</div>
+                        <div className="text-xs opacity-60 uppercase">Threats Neutralized</div>
+                    </div>
+                </div>
+                <div className="card card-cyber p-6 flex items-center gap-4 bg-black/20" style={{ borderLeftColor: 'var(--accent-green)' }}>
+                    <div className="p-3 bg-green-500/10 rounded-xl"><Zap size={24} color="var(--accent-green)" /></div>
+                    <div>
+                        <div className="text-2xl font-bold" style={{ color: 'var(--accent-green)' }}>ACTIVE</div>
+                        <div className="text-xs opacity-60 uppercase">Real-time Scanning</div>
+                    </div>
+                </div>
+                <div className="card card-cyber p-6 flex items-center gap-4 bg-black/20" style={{ borderLeftColor: 'var(--accent-red)' }}>
+                    <div className="p-3 bg-red-500/10 rounded-xl"><AlertTriangle size={24} color="var(--accent-red)" /></div>
+                    <div>
+                        <div className="text-2xl font-bold">0</div>
+                        <div className="text-xs opacity-60 uppercase">Active Vulnerabilities</div>
+                    </div>
                 </div>
             </div>
+
+            <div>
+                <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+                    <Layers size={20} color="var(--accent-green)" />
+                    Integrated Defensive Suite
+                </h2>
+
+                <div className="grid grid-cols-4 gap-6">
+                    {features.map((f, i) => (
+                        <Link
+                            key={f.title}
+                            to={f.path || `/feature/${f.id}`}
+                            className="card group hover:scale-105"
+                            style={{ padding: '20px', transition: 'all 0.3s ease' }}
+                        >
+                            <div className="flex justify-between items-start mb-4">
+                                <div className="p-2 rounded-lg bg-white/5 text-accent-blue group-hover:text-accent-green transition-colors">
+                                    {f.icon || <Lock size={20} />}
+                                </div>
+                                <span className={`text-[10px] uppercase font-bold tracking-tighter px-2 py-1 rounded ${f.status === 'Active' ? 'bg-green-500/10 text-accent-green' : 'bg-blue-500/10 text-accent-blue'}`} style={{
+                                    backgroundColor: f.status === 'Active' ? 'rgba(0, 255, 157, 0.1)' : 'rgba(0, 184, 255, 0.1)',
+                                    color: f.status === 'Active' ? 'var(--accent-green)' : 'var(--accent-blue)'
+                                }}>
+                                    {f.status}
+                                </span>
+                            </div>
+                            <h3 className="font-bold text-sm mb-1 group-hover:text-white">{f.title}</h3>
+                            <p className="text-xs opacity-60 leading-relaxed">{f.desc}</p>
+
+                            <div style={{
+                                position: 'absolute',
+                                bottom: 0,
+                                left: 0,
+                                height: '2px',
+                                width: '0%',
+                                background: 'linear-gradient(to right, var(--accent-green), var(--accent-blue))',
+                                transition: 'width 0.3s ease'
+                            }} className="group-hover:w-full"></div>
+                        </Link>
+                    ))}
+                </div>
+            </div>
+
+            <style>{`
+        .pulse-green {
+          width: 8px;
+          height: 8px;
+          background: var(--accent-green);
+          border-radius: 50%;
+          box-shadow: 0 0 0 rgba(0, 255, 157, 0.4);
+          animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+          0% { box-shadow: 0 0 0 0 rgba(0, 255, 157, 0.7); }
+          70% { box-shadow: 0 0 0 10px rgba(0, 255, 157, 0); }
+          100% { box-shadow: 0 0 0 0 rgba(0, 255, 157, 0); }
+        }
+      `}</style>
         </div>
     );
 };
