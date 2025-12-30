@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Shield, Mail, Lock, UserPlus, ArrowRight, ShieldCheck, RefreshCw } from 'lucide-react';
+import { Shield, Mail, Lock, UserPlus, ArrowRight, ShieldCheck, RefreshCw, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const Signup = () => {
@@ -11,6 +11,8 @@ const Signup = () => {
     const [error, setError] = useState('');
     const { signup } = useAuth();
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleInitialSubmit = async (e) => {
         e.preventDefault();
@@ -156,15 +158,32 @@ const Signup = () => {
                         <label className="text-sm block mb-1">Master Password</label>
                         <div className="relative">
                             <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 className="input"
-                                style={{ paddingLeft: '40px', marginBottom: 0 }}
+                                style={{ paddingLeft: '40px', paddingRight: '40px', marginBottom: 0 }}
                                 value={formData.password}
                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                 placeholder="••••••••"
                                 required
                             />
                             <Lock size={18} style={{ position: 'absolute', left: '12px', top: '12px', opacity: 0.5 }} />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                style={{
+                                    position: 'absolute',
+                                    right: '12px',
+                                    top: '12px',
+                                    background: 'none',
+                                    border: 'none',
+                                    color: 'var(--text-secondary)',
+                                    cursor: 'pointer',
+                                    opacity: 0.5,
+                                    padding: '4px'
+                                }}
+                            >
+                                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                            </button>
                         </div>
                     </div>
 
@@ -172,15 +191,32 @@ const Signup = () => {
                         <label className="text-sm block mb-1">Confirm Master Password</label>
                         <div className="relative">
                             <input
-                                type="password"
+                                type={showConfirmPassword ? "text" : "password"}
                                 className="input"
-                                style={{ paddingLeft: '40px', marginBottom: 0 }}
+                                style={{ paddingLeft: '40px', paddingRight: '40px', marginBottom: 0 }}
                                 value={formData.confirmPassword}
                                 onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                                 placeholder="••••••••"
                                 required
                             />
                             <Lock size={18} style={{ position: 'absolute', left: '12px', top: '12px', opacity: 0.5 }} />
+                            <button
+                                type="button"
+                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                style={{
+                                    position: 'absolute',
+                                    right: '12px',
+                                    top: '12px',
+                                    background: 'none',
+                                    border: 'none',
+                                    color: 'var(--text-secondary)',
+                                    cursor: 'pointer',
+                                    opacity: 0.5,
+                                    padding: '4px'
+                                }}
+                            >
+                                {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                            </button>
                         </div>
                     </div>
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Shield, Mail, Lock, LogIn, AlertCircle } from 'lucide-react';
+import { Shield, Mail, Lock, LogIn, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
@@ -10,6 +10,8 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false);
     const { login } = useAuth();
     const navigate = useNavigate();
+
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -64,15 +66,32 @@ const Login = () => {
                         <label className="text-sm block mb-1">Access Key</label>
                         <div className="relative">
                             <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 className="input"
-                                style={{ paddingLeft: '40px', marginBottom: 0 }}
+                                style={{ paddingLeft: '40px', paddingRight: '40px', marginBottom: 0 }}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="••••••••"
                                 required
                             />
                             <Lock size={18} style={{ position: 'absolute', left: '12px', top: '12px', opacity: 0.5 }} />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                style={{
+                                    position: 'absolute',
+                                    right: '12px',
+                                    top: '12px',
+                                    background: 'none',
+                                    border: 'none',
+                                    color: 'var(--text-secondary)',
+                                    cursor: 'pointer',
+                                    opacity: 0.5,
+                                    padding: '4px'
+                                }}
+                            >
+                                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                            </button>
                         </div>
                     </div>
 
