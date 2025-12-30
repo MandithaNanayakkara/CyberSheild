@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Shield, Mail, Lock, UserPlus, ArrowRight, ShieldCheck, RefreshCw, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const Signup = () => {
     const [step, setStep] = useState(1); // 1: Info, 2: Verification
     const [formData, setFormData] = useState({ email: '', password: '', confirmPassword: '' });
@@ -30,7 +32,7 @@ const Signup = () => {
         window.sessionStorage.setItem('shield_temp_code', generatedCode);
 
         try {
-            const response = await fetch('http://localhost:5000/api/send-code', {
+            const response = await fetch(`${API_URL}/api/send-code`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: formData.email, code: generatedCode })
