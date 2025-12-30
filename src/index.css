@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
 :root {
   --bg-primary: #050505;
   --bg-secondary: #0a0a0a;
@@ -15,7 +17,7 @@
   --font-main: 'Outfit', 'Inter', system-ui, sans-serif;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
 
 * {
   box-sizing: border-box;
